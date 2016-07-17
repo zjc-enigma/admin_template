@@ -1,0 +1,74 @@
+[
+    {
+        "bonus_cost": 296570.97, 
+        "bonus_cvt": 2119, 
+        "bonus_imp": 20837282, 
+        "date": "2016-07-10", 
+        "total_cost": 858559.6, 
+        "total_cvt": 3303, 
+        "total_imp": 177931549
+    }, 
+    {
+        "bonus_cost": 137304.77, 
+        "bonus_cvt": 865, 
+        "bonus_imp": 14362453, 
+        "date": "2016-07-11", 
+        "total_cost": 468530.69, 
+        "total_cvt": 1544, 
+        "total_imp": 87149179
+    }, 
+    {
+        "bonus_cost": 85700.55, 
+        "bonus_cvt": 687, 
+        "bonus_imp": 10020832, 
+        "date": "2016-07-12", 
+        "total_cost": 309005.77, 
+        "total_cvt": 1326, 
+        "total_imp": 72548683
+    }, 
+    {
+        "bonus_cost": 99278.53, 
+        "bonus_cvt": 1165, 
+        "bonus_imp": 13036072, 
+        "date": "2016-07-13", 
+        "total_cost": 498624.67, 
+        "total_cvt": 2046, 
+        "total_imp": 87349337
+    }, 
+    {
+        "bonus_cost": 108443.92, 
+        "bonus_cvt": 1444, 
+        "bonus_imp": 8926301, 
+        "date": "2016-07-14", 
+        "total_cost": 765442.27, 
+        "total_cvt": 3180, 
+        "total_imp": 61926854
+    }, 
+    {
+        "bonus_cost": 166809.94, 
+        "bonus_cvt": 2215, 
+        "bonus_imp": 12975422, 
+        "date": "2016-07-15", 
+        "total_cost": 1346616.27, 
+        "total_cvt": 5136, 
+        "total_imp": 94202953
+    }, 
+    {
+        "bonus_cost": 84595.71, 
+        "bonus_cvt": 1154, 
+        "bonus_imp": 7488978, 
+        "date": "2016-07-16", 
+        "total_cost": 1284911.87, 
+        "total_cvt": 4606, 
+        "total_imp": 73549404
+    }, 
+    {
+        "bonus_cost": 360.37, 
+        "bonus_cvt": 7, 
+        "bonus_imp": 18778, 
+        "date": "2016-07-17", 
+        "total_cost": 516334.07, 
+        "total_cvt": 1475, 
+        "total_imp": 27400554
+    }
+]

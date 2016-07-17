@@ -1,64 +1,14 @@
 # coding=utf8
 import os
-from flask import render_template, redirect
+from flask import render_template, redirect, flash
 from flask import send_from_directory, request, Response
 from jinja2 import Environment, FileSystemLoader, environment
 from app import app
+from utils import myutils
+from forms import RegistrationForm
+import json
 
-
-uber_data = [
-
-                 {
-    "date" : "2016-07-12",
-    "bonus_cvt": 113,
-    "total_cvt": 407,
-    "bonus_cost": 7000000,
-    "total_cost": 10000000,
-    "bonus_imp" : 783800,
-    "total_imp": 6040867
-             },
-
-                 {
-    "date" : "2016-07-13",
-    "bonus_cvt": 113,
-    "total_cvt": 407,
-    "bonus_cost": 2000000,
-    "total_cost": 50000000,
-    "bonus_imp" : 783800,
-    "total_imp": 6040867
-
-                 },
-
-             {
-    "date" : "2016-07-14",
-    "bonus_cvt": 113,
-    "total_cvt": 407,
-    "bonus_cost": 7200000,
-    "total_cost": 15000000,
-    "bonus_imp" : 783800,
-    "total_imp": 6040867
-             },
-    {
-    "date" : "2016-07-15",
-    "bonus_cvt": 1137,
-    "total_cvt": 4007,
-    "bonus_cost": 7900000,
-    "total_cost": 10000001,
-    "bonus_imp" : 7183800,
-    "total_imp": 60340867
-},
-             {
-    "date" : "2016-07-16",
-    "bonus_cvt": 113,
-    "total_cvt": 400,
-    "bonus_cost": 2200000,
-    "total_cost": 930000,
-    "bonus_imp" : 713800,
-    "total_imp": 600867
-}
-]
-
-def get_series(key, den=None):
+def get_series(key, uber_data, den=None):
     template = "[gd({year}, {month}, {day}), {amount}]"
     series_list = []
     sum_amount = 0
@@ -79,16 +29,54 @@ def get_series(key, den=None):
     return {"sum":sum_amount, "string":"[" + ",".join(series_list) + "];"}
 
 
+@app.route('/update',  methods=['GET', 'POST'])
+def update():
+
+    stat_data_path = "data/daily_stat_data"
+    stat_data = myutils.parse_json_conf(stat_data_path)
+    
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        form_data = {"date":form.date.data,
+                    "bonus_cvt": form.bonus_cvt.data,
+                    "total_cvt": form.total_cvt.data,
+                    "bonus_cost": form.bonus_cost.data,
+                    "total_cost": form.total_cost.data,
+                    "bonus_imp": form.bonus_imp.data,
+                    "total_imp": form.total_imp.data}
+
+        if not stat_data or stat_data[-1]['date'] != form_data['date']:
+            stat_data.append(form_data)
+
+        else:
+            stat_data[-1]["bonus_cvt"] = form_data['bonus_cvt']
+            stat_data[-1]["total_cvt"] = form_data['total_cvt']
+            stat_data[-1]["bonus_cost"] = form_data['bonus_cost']
+            stat_data[-1]["total_cost"] = form_data['total_cost']
+            stat_data[-1]["bonus_imp"] = form_data['bonus_imp']
+            stat_data[-1]["total_imp"] = form_data['total_imp']
+
+
+        myutils.update_conf(stat_data, stat_data_path)
+        return json.dumps(form_data), 200
+
+    return render_template('update.html', form=form)
+
+
+
 @app.route('/')
 def index():
+    print "goto index route"
+    uber_data = myutils.parse_json_conf("data/daily_stat_data")
+    print "reloading uberdata"
     return render_template('index.html',
                            data=uber_data,
-                           bonus_cost_series=get_series("bonus_cost"),
-                           total_cost_series=get_series("total_cost"),
-                           bonus_cvt_series=get_series("bonus_cvt"),
-                           total_cvt_series=get_series("total_cvt"),
-                          bonus_imp_series=get_series("bonus_imp"),
-                           total_imp_series=get_series("total_imp"),
+                           bonus_cost_series=get_series("bonus_cost", uber_data),
+                           total_cost_series=get_series("total_cost", uber_data),
+                           bonus_cvt_series=get_series("bonus_cvt", uber_data),
+                           total_cvt_series=get_series("total_cvt", uber_data),
+                           bonus_imp_series=get_series("bonus_imp", uber_data),
+                           total_imp_series=get_series("total_imp", uber_data),
      )
 
 

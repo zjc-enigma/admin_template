@@ -1,0 +1,13 @@
+{% from "_formhelper.html" import render_field %}
+<form method=post action="/update">
+    <dl>
+        {{ render_field(form.date) }}
+        {{ render_field(form.bonus_cvt) }}
+        {{ render_field(form.total_cvt) }}
+        {{ render_field(form.bonus_cost) }}
+        {{ render_field(form.total_cost) }}
+        {{ render_field(form.bonus_imp) }}
+        {{ render_field(form.total_imp) }}
+    </dl>
+    <p><input type=submit value=Register>
+</form>

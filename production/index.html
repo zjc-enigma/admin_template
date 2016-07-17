@@ -62,12 +62,12 @@
                       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> 总转化数</span>
                           <div class="count">{{data[-1]['total_cvt']|e}}</div>
-                          <span class="count_bottom"><i class="red"><i class="fa fa-sort-asc"></i>34% </i> </span>
+                          <span class="count_bottom"><i class="red"><i class="fa fa-sort-asc"></i>{{data[-1]['total_cvt']|e}}</i> </span>
                       </div>
                       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> 红包转化数</span>
                           <div class="count">{{data[-1]['bonus_cvt']|e}}</div>
-                          <span class="count_bottom"><i class="red"><i class="fa fa-sort-asc"></i>12% </i> </span>
+                          <span class="count_bottom"><i class="red"><i class="fa fa-sort-asc"></i>{{data[-1]['bonus_cvt']|e}} </i> </span>
                       </div>
                       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> 总曝光数</span>
@@ -93,7 +93,7 @@
                           <div class="x_title">
                               <h5>消耗量 </h5>
                           </div>
-                          <span class="chart" data-percent={{(100*data[-1]['bonus_cost']/data[-1]['total_cost'])|round(1)|int|e}}>
+                          <span class="chart" data-percent={{(100*data[-1]['bonus_cost']/data[-1]['total_cost'])|round(3)|int|e}}>
                               <span class="percent"></span>
                           </span>
                           
@@ -103,7 +103,7 @@
                               <h5>转化量 </h5>
                           </div>
 
-                          <span class="chart" data-percent={{(100*data[-1]['bonus_cvt']/data[-1]['total_cvt'])|round(1)|int|e}}">
+                          <span class="chart" data-percent={{(100*data[-1]['bonus_cvt']/data[-1]['total_cvt'])|round(3)|int|e}}">
                               <span class="percent"></span>
                           </span>
                       </div>
@@ -112,7 +112,7 @@
                               <h5>曝光量 </h5>
                           </div>
 
-                          <span class="chart" data-percent={{(100*data[-1]['bonus_imp']/data[-1]['total_imp'])|round(1)|int|e}}">
+                          <span class="chart" data-percent={{(100*data[-1]['bonus_imp']/data[-1]['total_imp'])|round(3)|int|e}}">
                               <span class="percent"></span>
                           </span>
                       </div>
