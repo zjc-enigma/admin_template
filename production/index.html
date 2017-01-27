@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentellela Alela! | </title>
+    <title>Daily Stat </title>
 
     <!-- Bootstrap -->
     <link href={{url_for('static', filename="css/bootstrap.min.css")}} rel="stylesheet">
@@ -23,6 +23,12 @@
     <link href={{url_for('static', filename="css/jqvmap.min.css")}} rel="stylesheet"/>
     <!-- Custom Theme Style -->
     <link href={{url_for('static', filename="css/custom.min.css")}} rel="stylesheet">
+    <style>
+      .goal-value{
+      padding-left:70px;
+      }
+    </style>
+
   </head>
 
   <body>
@@ -38,13 +44,12 @@
           </div>
 
           <div class="row tile_count">
-
               <div class="row">
                   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                       <canvas width="150" height="80" id="foo" class="" style="width: 160px; height: 100px;"></canvas>
                       <div class="goal-wrapper">
                           <span id="gauge-text" class="gauge-value pull-left">{{data[-1]['total_cost'] / 10000|round}}</span>
-                          <span id="goal-text" class="goal-value pull-right">100万</span>
+                          <span id="goal-text" class="goal-value">100万</span>
                       </div>
                   </div>
 
@@ -91,7 +96,7 @@
                   <div class="row">
                       <div class="col-xs-4">
                           <div class="x_title">
-                              <h5>消耗量 </h5>
+                              <h5>红包消耗量 </h5>
                           </div>
                           <span class="chart" data-percent={{(100*data[-1]['bonus_cost']/data[-1]['total_cost'])|round(3)|int|e}}>
                               <span class="percent"></span>
@@ -100,19 +105,19 @@
                       </div>
                       <div class="col-xs-4">
                           <div class="x_title">
-                              <h5>转化量 </h5>
+                              <h5>红包转化量 </h5>
                           </div>
 
-                          <span class="chart" data-percent={{(100*data[-1]['bonus_cvt']/data[-1]['total_cvt'])|round(3)|int|e}}">
+                          <span class="chart" data-percent={{(100*data[-1]['bonus_cvt']/data[-1]['total_cvt'])|round(3)|int|e}}>
                               <span class="percent"></span>
                           </span>
                       </div>
                       <div class="col-xs-4">
                           <div class="x_title">
-                              <h5>曝光量 </h5>
+                              <h5>红包曝光量 </h5>
                           </div>
 
-                          <span class="chart" data-percent={{(100*data[-1]['bonus_imp']/data[-1]['total_imp'])|round(3)|int|e}}">
+                          <span class="chart" data-percent={{(100*data[-1]['bonus_imp']/data[-1]['total_imp'])|round(3)|int|e}}>
                               <span class="percent"></span>
                           </span>
                       </div>
@@ -269,7 +274,7 @@
                       <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
                           <div class="x_panel tile fixed_height_320 overflow_hidden">
                               <div class="x_title">
-                                  <h2>红包转化数占比 </h2>
+                                  <h2>红包曝光数占比 </h2>
                                   <div class="clearfix"></div>
                               </div>
                               <div class="x_content">
@@ -594,8 +599,8 @@
              tooltipFillColor: "rgba(51, 51, 51, 0.55)",
              data: {
                  labels: [
-                     "Symbian",
-                     "Blackberry",
+                     "红包",
+                     "非红包",
                  ],
                  datasets: [{
                      data: [{{(bonus_cost_series['sum']/total_cost_series['sum'])*100}}, {{100*(total_cost_series['sum']-bonus_cost_series['sum'])/total_cost_series['sum']}}],
@@ -626,8 +631,8 @@
              tooltipFillColor: "rgba(51, 51, 51, 0.55)",
              data: {
                  labels: [
-                     "Symbian",
-                     "Blackberry",
+                     "红包",
+                     "非红包",
                  ],
                  datasets: [{
                      data: [{{(bonus_cvt_series['sum']/total_cvt_series['sum'])*100}}, {{100*(total_cvt_series['sum']-bonus_cvt_series['sum'])/total_cvt_series['sum']}}],
@@ -659,8 +664,8 @@
              tooltipFillColor: "rgba(51, 51, 51, 0.55)",
              data: {
                  labels: [
-                     "Symbian",
-                     "Blackberry",
+                     "红包",
+                     "非红包",
                  ],
                  datasets: [{
                      data: [{{(bonus_imp_series['sum']/total_imp_series['sum'])*100}}, {{100*(total_imp_series['sum']-bonus_imp_series['sum'])/total_imp_series['sum']}}],
@@ -862,6 +867,16 @@
       gauge.set({{data[-1]['total_cost']|round|int}});
       gauge.setTextField(document.getElementById("gauge-text"));
     </script>
+            <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-77845331-3', 'auto');
+          ga('send', 'pageview');
+        </script>
+
     <!-- /gauge.js -->
   </body>
 </html>

@@ -12,8 +12,12 @@ def get_series(key, uber_data, den=None):
     template = "[gd({year}, {month}, {day}), {amount}]"
     series_list = []
     sum_amount = 0
-
-    for item in uber_data:
+    if len(uber_data) > 7:
+        data_list = uber_data[-7:]
+    else:
+        data_list = uber_data
+        
+    for item in data_list:
 
         date_array = item['date'].split('-')
         year = date_array[0]
@@ -29,13 +33,16 @@ def get_series(key, uber_data, den=None):
     return {"sum":sum_amount, "string":"[" + ",".join(series_list) + "];"}
 
 
-@app.route('/update',  methods=['GET', 'POST'])
+@app.route('/demos/daily_stat/update',  methods=['GET', 'POST'])
 def update():
 
     stat_data_path = "data/daily_stat_data"
     stat_data = myutils.parse_json_conf(stat_data_path)
     
     form = RegistrationForm(request.form)
+    if not form.validate():
+        print "something is wrong in forms"
+        
     if request.method == 'POST' and form.validate():
         form_data = {"date":form.date.data,
                     "bonus_cvt": form.bonus_cvt.data,
@@ -64,7 +71,7 @@ def update():
 
 
 
-@app.route('/')
+@app.route('/demos/daily_stat')
 def index():
     print "goto index route"
     uber_data = myutils.parse_json_conf("data/daily_stat_data")
